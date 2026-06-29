@@ -3,12 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>COFFEE OF SF - Find Your Spot</title>
+    <title>COFFEE OF SF - Find Your Ritual</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap');
         
         :root {
             --gold: #f4d03f;
+            --dark: #0a0a0a;
+            --card: #141414;
+            --border: #2a2a2a;
         }
         
         * {
@@ -17,346 +20,624 @@
             box-sizing: border-box;
         }
         
+        html {
+            scroll-behavior: smooth;
+        }
+        
         body {
             font-family: 'Inter', system-ui, sans-serif;
-            background: #0a0a0a;
+            background: linear-gradient(180deg, #0a0a0a 0%, #0f0f0f 100%);
             color: #ddd;
             line-height: 1.6;
+            overflow-x: hidden;
         }
-        
+
+        /* WATERMARK */
+        body::before {
+            content: 'COFFEE';
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 35vw;
+            font-weight: 700;
+            font-family: 'Playfair Display', serif;
+            color: rgba(244, 208, 63, 0.04);
+            z-index: 0;
+            pointer-events: none;
+            letter-spacing: 30px;
+            line-height: 1;
+        }
+
+        /* HEADER */
         header {
-            background: linear-gradient(to bottom, #2c1a0f, #0a0a0a);
-            padding: 4rem 2rem 3rem;
+            background: linear-gradient(180deg, #1a1a1a 0%, #0a0a0a 100%);
+            padding: 6rem 2rem 4rem;
             text-align: center;
             position: relative;
+            overflow: hidden;
+            z-index: 1;
+            border-bottom: 1px solid var(--border);
         }
-        
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 0%, rgba(244, 208, 63, 0.08) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
         .logo {
             font-family: 'Playfair Display', serif;
-            font-size: 3.5rem;
+            font-size: 4rem;
             font-weight: 700;
             color: var(--gold);
-            letter-spacing: 4px;
+            letter-spacing: 6px;
+            animation: fadeInDown 0.8s ease-out;
+            position: relative;
+            z-index: 2;
         }
-        
+
         .tagline {
-            color: #aaa;
-            font-size: 1.1rem;
-            margin-top: 0.5rem;
-            font-style: italic;
+            color: #999;
+            font-size: 1rem;
+            margin-top: 1rem;
+            font-weight: 300;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
         }
-        
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* SEARCH SECTION */
         .search-section {
-            max-width: 800px;
-            margin: -3rem auto 4rem;
-            padding: 2rem;
-            background: rgba(20, 20, 20, 0.95);
-            border-radius: 16px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+            max-width: 900px;
+            margin: -4rem auto 6rem;
+            padding: 3rem;
+            background: linear-gradient(135deg, #1a1a1a 0%, #141414 100%);
+            border-radius: 0;
+            border: 1px solid var(--border);
+            box-shadow: 0 40px 80px rgba(0,0,0,0.8);
+            position: relative;
+            z-index: 10;
         }
-        
+
+        .search-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+
+        .search-label {
+            font-size: 0.8rem;
+            color: #888;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            display: block;
+            font-weight: 600;
+        }
+
         .vibe-input {
             width: 100%;
-            padding: 1rem 1.5rem;
-            background: #111;
-            border: none;
-            border-radius: 8px;
-            color: white;
-            font-size: 1.1rem;
+            padding: 1.2rem 1.5rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border);
+            border-radius: 0;
+            color: #fff;
+            font-size: 1rem;
             margin-bottom: 1rem;
-        }
-        
-        .find-btn {
-            width: 100%;
-            padding: 1.2rem;
-            background: var(--gold);
-            color: #111;
-            border: none;
-            border-radius: 8px;
-            font-size: 1.3rem;
-            font-weight: 600;
-            cursor: pointer;
+            font-family: 'Inter', sans-serif;
             transition: all 0.3s;
         }
-        
+
+        .vibe-input:focus {
+            outline: none;
+            background: rgba(244, 208, 63, 0.05);
+            border-color: var(--gold);
+            box-shadow: 0 0 20px rgba(244, 208, 63, 0.1);
+        }
+
+        .find-btn {
+            width: 100%;
+            padding: 1.4rem;
+            background: linear-gradient(135deg, var(--gold), #e6c200);
+            color: #000;
+            border: none;
+            border-radius: 0;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-family: 'Playfair Display', serif;
+        }
+
         .find-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(244, 208, 63, 0.3);
+            box-shadow: 0 20px 40px rgba(244, 208, 63, 0.4);
         }
-        
+
+        .find-btn:active {
+            transform: translateY(0);
+        }
+
         .browse {
             text-align: center;
-            margin-top: 1rem;
-            color: #888;
-            font-size: 0.95rem;
+            margin-top: 1.5rem;
+            color: #666;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
         }
-        
+
+        /* SECTION TITLE */
         .section-title {
             text-transform: uppercase;
-            letter-spacing: 2px;
-            font-size: 1rem;
-            margin: 4rem 2rem 1.5rem;
-            color: #aaa;
+            letter-spacing: 3px;
+            font-size: 0.9rem;
+            margin: 6rem 2rem 3rem;
+            color: #666;
+            font-weight: 700;
+            position: relative;
+            z-index: 2;
         }
-        
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 1px;
+            background: var(--gold);
+            margin-top: 1rem;
+        }
+
+        /* GRID */
         .cafes-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
-            gap: 2rem;
-            padding: 0 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+            gap: 2.5rem;
+            padding: 0 2rem 6rem;
             max-width: 1400px;
             margin: 0 auto;
+            position: relative;
+            z-index: 2;
         }
-        
+
+        /* CARDS */
         .cafe-card {
-            background: #1a1a1a;
-            border-radius: 16px;
+            background: linear-gradient(135deg, #1a1a1a 0%, #141414 100%);
+            border: 1px solid var(--border);
             overflow: hidden;
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
             height: 100%;
             display: flex;
             flex-direction: column;
             cursor: pointer;
-        }
-        
-        .cafe-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-        }
-        
-        .cafe-header {
-            padding: 1.5rem 1.5rem 1rem;
             position: relative;
+            group: card;
         }
-        
+
+        .cafe-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .cafe-card:hover::before {
+            opacity: 1;
+        }
+
+        .cafe-card:hover {
+            transform: translateY(-12px);
+            border-color: var(--gold);
+            box-shadow: 0 30px 60px rgba(244, 208, 63, 0.15);
+        }
+
+        .cafe-header {
+            padding: 2rem 2rem 1.5rem;
+            position: relative;
+            overflow: hidden;
+            min-height: 140px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+
+        .cafe-header::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.4) 100%);
+            z-index: 1;
+        }
+
         .cafe-name {
-            font-size: 1.5rem;
-            font-weight: 600;
+            font-size: 1.6rem;
+            font-weight: 700;
+            position: relative;
+            z-index: 2;
+            font-family: 'Playfair Display', serif;
+            letter-spacing: 1px;
         }
-        
+
         .cafe-location {
-            color: #888;
-            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+            position: relative;
+            z-index: 2;
+            margin-top: 0.3rem;
+            letter-spacing: 0.5px;
         }
-        
+
         .vibe-badge {
             position: absolute;
             top: 1.5rem;
             right: 1.5rem;
-            background: rgba(0,0,0,0.7);
-            padding: 0.3rem 1rem;
-            border-radius: 9999px;
-            font-size: 0.8rem;
-            font-weight: 500;
+            background: rgba(244, 208, 63, 0.15);
+            backdrop-filter: blur(10px);
+            padding: 0.5rem 1.2rem;
+            border: 1px solid rgba(244, 208, 63, 0.3);
+            border-radius: 0;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            z-index: 3;
         }
-        
+
         .cafe-desc {
-            padding: 0 1.5rem 1.5rem;
+            padding: 1.8rem 2rem;
             flex-grow: 1;
-            color: #ccc;
+            color: #aaa;
+            font-size: 0.95rem;
+            line-height: 1.8;
+            border-bottom: 1px solid var(--border);
         }
-        
+
         .cafe-footer {
-            padding: 1rem 1.5rem;
-            border-top: 1px solid #333;
+            padding: 1.5rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
         }
-        
+
         .rating {
             display: flex;
             align-items: center;
-            gap: 0.4rem;
+            gap: 0.8rem;
+            color: #999;
         }
-        
-        .price {
-            color: #aaa;
-        }
-        
-        .arrow {
-            font-size: 1.4rem;
+
+        .rating::before {
+            content: '★';
             color: var(--gold);
+            font-size: 1rem;
         }
-        
-        .owner-section {
-            background: #111;
-            padding: 4rem 2rem;
-            text-align: center;
-            margin-top: 4rem;
-        }
-        
-        .owner-section h2 {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
-        }
-        
-        .get-listed {
-            background: var(--gold);
-            color: #111;
-            padding: 1rem 3rem;
-            border: none;
-            border-radius: 8px;
-            font-size: 1.2rem;
+
+        .price {
+            color: var(--gold);
             font-weight: 600;
-            margin-top: 2rem;
-            cursor: pointer;
         }
-        
+
+        .arrow {
+            font-size: 1.5rem;
+            color: var(--gold);
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: all 0.3s;
+        }
+
+        .cafe-card:hover .arrow {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* OWNER SECTION */
+        .owner-section {
+            background: linear-gradient(135deg, #1a1a1a 0%, #141414 100%);
+            padding: 6rem 2rem;
+            text-align: center;
+            margin-top: 6rem;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            position: relative;
+            z-index: 2;
+        }
+
+        .owner-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+
+        .owner-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-family: 'Playfair Display', serif;
+            letter-spacing: 2px;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .owner-section p {
+            max-width: 500px;
+            margin: 0 auto 2.5rem;
+            color: #999;
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+
+        .get-listed {
+            background: linear-gradient(135deg, var(--gold), #e6c200);
+            color: #000;
+            padding: 1.2rem 3rem;
+            border: none;
+            border-radius: 0;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .get-listed:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 40px rgba(244, 208, 63, 0.3);
+        }
+
+        /* FOOTER */
         footer {
             text-align: center;
-            padding: 3rem 1rem;
-            color: #666;
-            font-size: 0.9rem;
+            padding: 3rem 2rem;
+            color: #555;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 2;
         }
-        
+
+        footer a {
+            color: var(--gold);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* RESPONSIVE */
         @media (max-width: 768px) {
             .cafes-grid {
                 grid-template-columns: 1fr;
-                padding: 0 1rem;
+                padding: 0 1rem 4rem;
             }
             
             .logo {
-                font-size: 2.8rem;
+                font-size: 2.5rem;
+                letter-spacing: 3px;
             }
+
+            .search-section {
+                margin-left: 1rem;
+                margin-right: 1rem;
+                padding: 2rem 1.5rem;
+            }
+
+            .owner-section h2 {
+                font-size: 1.8rem;
+            }
+        }
+
+        /* SCROLL ANIMATIONS */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
 <body>
     <header>
         <div class="logo">COFFEE OF SF</div>
-        <p class="tagline">find your spot. chill. connect.</p>
+        <p class="tagline">Find Your Ritual • Discover Real Spots • Connect</p>
     </header>
     
     <div class="search-section">
-        <h3 style="margin-bottom: 1rem; color: #ccc;">What's your vibe?</h3>
+        <label class="search-label">What's Your Vibe?</label>
         <input type="text" class="vibe-input" id="vibeInput" 
-               placeholder="quiet morning, work all day, meet a friend, outdoor, natural light..." 
-               value="quiet morning, work all day, meet a friend, outdoor, natural light...">
+               placeholder="quiet morning, work focus, latte art, meet friends, outdoor...">
         <button class="find-btn" onclick="findSpot()">Find My Spot</button>
         <p class="browse">or browse below</p>
     </div>
     
-    <div class="section-title">POPULAR VIBES RIGHT NOW</div>
+    <div class="section-title">Captured Moments</div>
     
     <div class="cafes-grid">
-        <div class="cafe-card" onclick="showCafeDetail('Ember & Co')">
-            <div class="cafe-header" style="background: linear-gradient(135deg, #f4d03f, #d4af37); color: #111;">
-                <div class="cafe-name">Ember &amp; Co</div>
-                <div class="cafe-location">Mission District</div>
-                <div class="vibe-badge" style="background: #111; color: #f4d03f;">Work Spot</div>
+        <div class="cafe-card fade-in" onclick="showCafeDetail('Ember & Co')">
+            <div class="cafe-header" style="background: linear-gradient(135deg, #d4af37 0%, #8b6f47 100%);">
+                <div class="cafe-name" style="color: #000;">Ember &amp; Co</div>
+                <div class="cafe-location" style="color: #4a3820;">Mission District</div>
+                <div class="vibe-badge" style="background: rgba(0,0,0,0.3); color: #fff; border-color: rgba(255,255,255,0.3);">Work Spot</div>
             </div>
             <div class="cafe-desc">
-                natural light, good wifi, pastries from the place downstairs.
+                Natural light pouring in. WiFi that actually works. Pastries from downstairs. The sound of espresso machines. Where things get done.
             </div>
             <div class="cafe-footer">
-                <div class="rating">⭐ 4.7 <span class="price">$4.50</span></div>
+                <div class="rating">4.7 <span class="price">$4.50</span></div>
                 <div class="arrow">→</div>
             </div>
         </div>
         
-        <div class="cafe-card" onclick="showCafeDetail('Somewhere Coffee')">
-            <div class="cafe-header" style="background: linear-gradient(135deg, #8c5a2b, #5c4033); color: white;">
+        <div class="cafe-card fade-in" onclick="showCafeDetail('Somewhere Coffee')" style="transition-delay: 0.1s;">
+            <div class="cafe-header" style="background: linear-gradient(135deg, #8c5a2b 0%, #5c4033 100%);">
                 <div class="cafe-name">Somewhere Coffee</div>
                 <div class="cafe-location">Hayes Valley</div>
                 <div class="vibe-badge">Chill Vibes</div>
             </div>
             <div class="cafe-desc">
-                vintage furniture, good conversation, plants everywhere, slow mornings.
+                Vintage chairs that have stories. Plants everywhere. Good conversations happen here. Slow mornings feel right. No rush.
             </div>
             <div class="cafe-footer">
-                <div class="rating">⭐ 4.8 <span class="price">$3.75</span></div>
+                <div class="rating">4.8 <span class="price">$3.75</span></div>
                 <div class="arrow">→</div>
             </div>
         </div>
         
-        <div class="cafe-card" onclick="showCafeDetail('Ritual Roasters')">
-            <div class="cafe-header" style="background: linear-gradient(135deg, #4a3728, #2c211b); color: white;">
+        <div class="cafe-card fade-in" onclick="showCafeDetail('Ritual Roasters')" style="transition-delay: 0.2s;">
+            <div class="cafe-header" style="background: linear-gradient(135deg, #4a3728 0%, #2c211b 100%);">
                 <div class="cafe-name">Ritual Roasters</div>
                 <div class="cafe-location">SOMA + Multiple</div>
-                <div class="vibe-badge" style="background: #555;">Coffee Nerd</div>
+                <div class="vibe-badge">Coffee Nerd</div>
             </div>
             <div class="cafe-desc">
-                pour overs, single origin. people know their stuff. conversations everywhere.
+                Pour overs done right. Single origin. People who know. Conversations about coffee taste like coffee. Watch the ritual unfold.
             </div>
             <div class="cafe-footer">
-                <div class="rating">⭐ 4.9 <span class="price">$5.00</span></div>
+                <div class="rating">4.9 <span class="price">$5.00</span></div>
                 <div class="arrow">→</div>
             </div>
         </div>
         
-        <div class="cafe-card" onclick="showCafeDetail('The Mudroom')">
-            <div class="cafe-header" style="background: linear-gradient(135deg, #9c6644, #6b442b); color: white;">
+        <div class="cafe-card fade-in" onclick="showCafeDetail('The Mudroom')" style="transition-delay: 0.3s;">
+            <div class="cafe-header" style="background: linear-gradient(135deg, #9c6644 0%, #6b442b 100%);">
                 <div class="cafe-name">The Mudroom</div>
                 <div class="cafe-location">Sunset District</div>
-                <div class="vibe-badge" style="background: #3a2f1f;">Meet Friends</div>
+                <div class="vibe-badge">Meet Friends</div>
             </div>
             <div class="cafe-desc">
-                outdoor seating, friendly owners. always someone you know here.
+                Outdoor seating catches real light. Owners who know your name. You always run into someone you know. That's the point.
             </div>
             <div class="cafe-footer">
-                <div class="rating">⭐ 4.6 <span class="price">$4.00</span></div>
+                <div class="rating">4.6 <span class="price">$4.00</span></div>
                 <div class="arrow">→</div>
             </div>
         </div>
         
-        <div class="cafe-card" onclick="showCafeDetail('Blueprint Cafe')">
-            <div class="cafe-header" style="background: linear-gradient(135deg, #5c5c5c, #3a3a3a); color: white;">
+        <div class="cafe-card fade-in" onclick="showCafeDetail('Blueprint Cafe')" style="transition-delay: 0.4s;">
+            <div class="cafe-header" style="background: linear-gradient(135deg, #5c5c5c 0%, #3a3a3a 100%);">
                 <div class="cafe-name">Blueprint Cafe</div>
                 <div class="cafe-location">North Beach</div>
-                <div class="vibe-badge" style="background: #444;">Creative Space</div>
+                <div class="vibe-badge">Creative Space</div>
             </div>
             <div class="cafe-desc">
-                art on walls, music's always right. indie vibe without trying.
+                Art that makes sense. Music that's never wrong. Indie vibes without trying. Creatives at every table doing real work.
             </div>
             <div class="cafe-footer">
-                <div class="rating">⭐ 4.7 <span class="price">$4.25</span></div>
+                <div class="rating">4.7 <span class="price">$4.25</span></div>
                 <div class="arrow">→</div>
             </div>
         </div>
         
-        <div class="cafe-card" onclick="showCafeDetail('Common Grounds')">
-            <div class="cafe-header" style="background: linear-gradient(135deg, #8d6e63, #5d4037); color: white;">
+        <div class="cafe-card fade-in" onclick="showCafeDetail('Common Grounds')" style="transition-delay: 0.5s;">
+            <div class="cafe-header" style="background: linear-gradient(135deg, #8d6e63 0%, #5d4037 100%);">
                 <div class="cafe-name">Common Grounds</div>
                 <div class="cafe-location">Inner Sunset</div>
-                <div class="vibe-badge" style="background: #3f2a1d;">Morning Ritual</div>
+                <div class="vibe-badge">Morning Ritual</div>
             </div>
             <div class="cafe-desc">
-                locals only vibes. everyone knows your order. simple, good coffee.
+                Locals only energy. Everyone knows your order. Simple. Good coffee. No pretense. Just the ritual. Every morning, same spot.
             </div>
             <div class="cafe-footer">
-                <div class="rating">⭐ 4.5 <span class="price">$3.50</span></div>
+                <div class="rating">4.5 <span class="price">$3.50</span></div>
                 <div class="arrow">→</div>
             </div>
         </div>
     </div>
     
     <div class="owner-section">
-        <h2>Own a coffee shop?</h2>
-        <p style="max-width: 500px; margin: 0 auto 1.5rem; color: #aaa;">
-            Get discovered by real people. List your shop free, upgrade for features.
-        </p>
-        <button class="get-listed" onclick="getListed()">Get Listed</button>
+        <h2>Own a Coffee Shop?</h2>
+        <p>Get discovered by real people. List your shop free. Upgrade for analytics, AI ordering, featured placement, real-time crowd updates.</p>
+        <button class="get-listed" onclick="getListed()">Get Listed Now</button>
     </div>
     
     <footer>
-        © 2026 Coffee of SF • Real coffee spots in San Francisco • 
-        <a href="#" style="color: #f4d03f; text-decoration: none;">Make money listing your shop</a>
+        © 2026 Coffee of SF • Real coffee spots by real people • 
+        <a href="#">Premium Features</a> • 
+        <a href="#">API Access</a>
     </footer>
 
     <script>
+        // SCROLL ANIMATIONS
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
         function findSpot() {
-            const vibe = document.getElementById('vibeInput').value;
-            alert(`🔍 Finding the perfect SF coffee spot for: "${vibe}"\n\n(This will connect to real AI matching + shop data soon!)`);
+            const vibe = document.getElementById('vibeInput').value || 'your vibe';
+            alert(`🔍 SEARCHING FOR: "${vibe}"\n\n✨ AI is matching you with the perfect SF coffee spot...\n\n(Coming: Real-time crowd levels, reservations, AI ordering)`);
         }
         
         function getListed() {
-            alert("🚀 Awesome! Let's get your coffee shop listed.\n\nThis is where we can build paid features, AI ordering, etc.");
+            alert("🚀 LET'S GET YOUR SHOP ON THE MAP\n\nEmail: contact@coffeeofsf.com\n\nWe'll handle: photos, analytics, featured placement, real-time updates.");
         }
         
         function showCafeDetail(name) {
-            alert(`📍 ${name} details opening...\n\n(Full profile with menu, real-time crowd, AI ordering coming next!)`);
+            alert(`📍 ${name}\n\n(Full profile • Photos • Hours • Menu • Real-time crowd • Reservations coming soon)`);
         }
     </script>
 </body>
