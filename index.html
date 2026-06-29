@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COFFEE OF SF - Find Your Spot</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600&display=swap');
+        
+        :root {
+            --gold: #f4d03f;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: #0a0a0a;
+            color: #ddd;
+            line-height: 1.6;
+        }
+        
+        header {
+            background: linear-gradient(to bottom, #2c1a0f, #0a0a0a);
+            padding: 4rem 2rem 3rem;
+            text-align: center;
+            position: relative;
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--gold);
+            letter-spacing: 4px;
+        }
+        
+        .tagline {
+            color: #aaa;
+            font-size: 1.1rem;
+            margin-top: 0.5rem;
+            font-style: italic;
+        }
+        
+        .search-section {
+            max-width: 800px;
+            margin: -3rem auto 4rem;
+            padding: 2rem;
+            background: rgba(20, 20, 20, 0.95);
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+        }
+        
+        .vibe-input {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            background: #111;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .find-btn {
+            width: 100%;
+            padding: 1.2rem;
+            background: var(--gold);
+            color: #111;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.3rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .find-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(244, 208, 63, 0.3);
+        }
+        
+        .browse {
+            text-align: center;
+            margin-top: 1rem;
+            color: #888;
+            font-size: 0.95rem;
+        }
+        
+        .section-title {
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 1rem;
+            margin: 4rem 2rem 1.5rem;
+            color: #aaa;
+        }
+        
+        .cafes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 2rem;
+            padding: 0 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .cafe-card {
+            background: #1a1a1a;
+            border-radius: 16px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+        }
+        
+        .cafe-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+        
+        .cafe-header {
+            padding: 1.5rem 1.5rem 1rem;
+            position: relative;
+        }
+        
+        .cafe-name {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        
+        .cafe-location {
+            color: #888;
+            font-size: 0.95rem;
+        }
+        
+        .vibe-badge {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: rgba(0,0,0,0.7);
+            padding: 0.3rem 1rem;
+            border-radius: 9999px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .cafe-desc {
+            padding: 0 1.5rem 1.5rem;
+            flex-grow: 1;
+            color: #ccc;
+        }
+        
+        .cafe-footer {
+            padding: 1rem 1.5rem;
+            border-top: 1px solid #333;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.95rem;
+        }
+        
+        .rating {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        
+        .price {
+            color: #aaa;
+        }
+        
+        .arrow {
+            font-size: 1.4rem;
+            color: var(--gold);
+        }
+        
+        .owner-section {
+            background: #111;
+            padding: 4rem 2rem;
+            text-align: center;
+            margin-top: 4rem;
+        }
+        
+        .owner-section h2 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .get-listed {
+            background: var(--gold);
+            color: #111;
+            padding: 1rem 3rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-top: 2rem;
+            cursor: pointer;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .cafes-grid {
+                grid-template-columns: 1fr;
+                padding: 0 1rem;
+            }
+            
+            .logo {
+                font-size: 2.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">COFFEE OF SF</div>
+        <p class="tagline">find your spot. chill. connect.</p>
+    </header>
+    
+    <div class="search-section">
+        <h3 style="margin-bottom: 1rem; color: #ccc;">What's your vibe?</h3>
+        <input type="text" class="vibe-input" id="vibeInput" 
+               placeholder="quiet morning, work all day, meet a friend, outdoor, natural light..." 
+               value="quiet morning, work all day, meet a friend, outdoor, natural light...">
+        <button class="find-btn" onclick="findSpot()">Find My Spot</button>
+        <p class="browse">or browse below</p>
+    </div>
+    
+    <div class="section-title">POPULAR VIBES RIGHT NOW</div>
+    
+    <div class="cafes-grid">
+        <div class="cafe-card" onclick="showCafeDetail('Ember & Co')">
+            <div class="cafe-header" style="background: linear-gradient(135deg, #f4d03f, #d4af37); color: #111;">
+                <div class="cafe-name">Ember &amp; Co</div>
+                <div class="cafe-location">Mission District</div>
+                <div class="vibe-badge" style="background: #111; color: #f4d03f;">Work Spot</div>
+            </div>
+            <div class="cafe-desc">
+                natural light, good wifi, pastries from the place downstairs.
+            </div>
+            <div class="cafe-footer">
+                <div class="rating">⭐ 4.7 <span class="price">$4.50</span></div>
+                <div class="arrow">→</div>
+            </div>
+        </div>
+        
+        <div class="cafe-card" onclick="showCafeDetail('Somewhere Coffee')">
+            <div class="cafe-header" style="background: linear-gradient(135deg, #8c5a2b, #5c4033); color: white;">
+                <div class="cafe-name">Somewhere Coffee</div>
+                <div class="cafe-location">Hayes Valley</div>
+                <div class="vibe-badge">Chill Vibes</div>
+            </div>
+            <div class="cafe-desc">
+                vintage furniture, good conversation, plants everywhere, slow mornings.
+            </div>
+            <div class="cafe-footer">
+                <div class="rating">⭐ 4.8 <span class="price">$3.75</span></div>
+                <div class="arrow">→</div>
+            </div>
+        </div>
+        
+        <div class="cafe-card" onclick="showCafeDetail('Ritual Roasters')">
+            <div class="cafe-header" style="background: linear-gradient(135deg, #4a3728, #2c211b); color: white;">
+                <div class="cafe-name">Ritual Roasters</div>
+                <div class="cafe-location">SOMA + Multiple</div>
+                <div class="vibe-badge" style="background: #555;">Coffee Nerd</div>
+            </div>
+            <div class="cafe-desc">
+                pour overs, single origin. people know their stuff. conversations everywhere.
+            </div>
+            <div class="cafe-footer">
+                <div class="rating">⭐ 4.9 <span class="price">$5.00</span></div>
+                <div class="arrow">→</div>
+            </div>
+        </div>
+        
+        <div class="cafe-card" onclick="showCafeDetail('The Mudroom')">
+            <div class="cafe-header" style="background: linear-gradient(135deg, #9c6644, #6b442b); color: white;">
+                <div class="cafe-name">The Mudroom</div>
+                <div class="cafe-location">Sunset District</div>
+                <div class="vibe-badge" style="background: #3a2f1f;">Meet Friends</div>
+            </div>
+            <div class="cafe-desc">
+                outdoor seating, friendly owners. always someone you know here.
+            </div>
+            <div class="cafe-footer">
+                <div class="rating">⭐ 4.6 <span class="price">$4.00</span></div>
+                <div class="arrow">→</div>
+            </div>
+        </div>
+        
+        <div class="cafe-card" onclick="showCafeDetail('Blueprint Cafe')">
+            <div class="cafe-header" style="background: linear-gradient(135deg, #5c5c5c, #3a3a3a); color: white;">
+                <div class="cafe-name">Blueprint Cafe</div>
+                <div class="cafe-location">North Beach</div>
+                <div class="vibe-badge" style="background: #444;">Creative Space</div>
+            </div>
+            <div class="cafe-desc">
+                art on walls, music's always right. indie vibe without trying.
+            </div>
+            <div class="cafe-footer">
+                <div class="rating">⭐ 4.7 <span class="price">$4.25</span></div>
+                <div class="arrow">→</div>
+            </div>
+        </div>
+        
+        <div class="cafe-card" onclick="showCafeDetail('Common Grounds')">
+            <div class="cafe-header" style="background: linear-gradient(135deg, #8d6e63, #5d4037); color: white;">
+                <div class="cafe-name">Common Grounds</div>
+                <div class="cafe-location">Inner Sunset</div>
+                <div class="vibe-badge" style="background: #3f2a1d;">Morning Ritual</div>
+            </div>
+            <div class="cafe-desc">
+                locals only vibes. everyone knows your order. simple, good coffee.
+            </div>
+            <div class="cafe-footer">
+                <div class="rating">⭐ 4.5 <span class="price">$3.50</span></div>
+                <div class="arrow">→</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="owner-section">
+        <h2>Own a coffee shop?</h2>
+        <p style="max-width: 500px; margin: 0 auto 1.5rem; color: #aaa;">
+            Get discovered by real people. List your shop free, upgrade for features.
+        </p>
+        <button class="get-listed" onclick="getListed()">Get Listed</button>
+    </div>
+    
+    <footer>
+        © 2026 Coffee of SF • Real coffee spots in San Francisco • 
+        <a href="#" style="color: #f4d03f; text-decoration: none;">Make money listing your shop</a>
+    </footer>
+
+    <script>
+        function findSpot() {
+            const vibe = document.getElementById('vibeInput').value;
+            alert(`🔍 Finding the perfect SF coffee spot for: "${vibe}"\n\n(This will connect to real AI matching + shop data soon!)`);
+        }
+        
+        function getListed() {
+            alert("🚀 Awesome! Let's get your coffee shop listed.\n\nThis is where we can build paid features, AI ordering, etc.");
+        }
+        
+        function showCafeDetail(name) {
+            alert(`📍 ${name} details opening...\n\n(Full profile with menu, real-time crowd, AI ordering coming next!)`);
+        }
+    </script>
+</body>
+</html>
