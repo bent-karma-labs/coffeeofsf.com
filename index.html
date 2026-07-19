@@ -8,79 +8,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }/* For Sale Banner */
-.for-sale-banner {
-    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-    color: var(--bg-white);
-    text-align: center;
-    padding: 0.8rem 5%;
-    position: relative;
-    z-index: 1001;
-}
-
-.banner-content {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 1.5rem;
-    flex-wrap: wrap;
-}
-
-.banner-text {
-    font-size: 0.95rem;
-    font-weight: 500;
-    letter-spacing: 0.3px;
-}
-
-.banner-text strong {
-    font-weight: 700;
-    color: var(--bg-white);
-}
-
-.banner-link {
-    background: var(--bg-white);
-    color: var(--secondary-color);
-    padding: 0.4rem 1.2rem;
-    border-radius: 20px;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 0.85rem;
-    transition: all 0.3s;
-    white-space: nowrap;
-}
-
-.banner-link:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-}
-
-/* Adjust navigation z-index to account for banner */
-nav {
-    z-index: 1000;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-    .banner-content {
-        flex-direction: column;
-        gap: 0.5rem;
-    }
-    
-    .banner-text {
-        font-size: 0.85rem;
-    }
-    
-    .for-sale-banner {
-        padding: 1rem 5%;
-    }
-}
-
         :root {
             --primary-color: #d4a574;
             --secondary-color: #8b6914;
@@ -91,21 +18,69 @@ nav {
             --border-color: #e8e4de;
         }
 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             font-family: 'Inter', sans-serif;
             background-color: var(--bg-cream);
             color: var(--text-dark);
             line-height: 1.6;
-        }<!-- For Sale Banner -->
-<div class="for-sale-banner">
-    <div class="banner-content">
-        <span class="banner-text">🏷️ This domain & website is <strong>FOR SALE</strong></span>
-        <a href="mailto:sale@coffeeofsf.com?subject=Interested%20in%20Purchasing%20Coffee%20of%20SF" class="banner-link">Contact us →</a>
-    </div>
-</div>
+        }
 
         h1, h2, h3, h4 {
             font-family: 'Playfair Display', serif;
+        }
+
+        /* For Sale Banner */
+        .for-sale-banner {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: var(--bg-white);
+            text-align: center;
+            padding: 0.8rem 5%;
+            position: relative;
+            z-index: 1002;
+        }
+
+        .banner-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .banner-text {
+            font-size: 0.95rem;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+        }
+
+        .banner-text strong {
+            font-weight: 700;
+            color: var(--bg-white);
+        }
+
+        .banner-link {
+            background: var(--bg-white);
+            color: var(--secondary-color);
+            padding: 0.4rem 1.2rem;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+
+        .banner-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         }
 
         /* Navigation */
@@ -344,7 +319,7 @@ nav {
         }
 
         .quote {
-            font-: italic;
+            font-style: italic;
             color: var(--text-light);
             margin-bottom: 2rem;
             font-size: 1.1rem;
@@ -510,13 +485,34 @@ nav {
                 border-radius: 15px;
                 margin: 0.5rem;
             }
+            
+            .banner-content {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .banner-text {
+                font-size: 0.85rem;
+            }
+            
+            .for-sale-banner {
+                padding: 1rem 5%;
+            }
         }
-    </>
+    </style>
 </head>
 <body>
+    <!-- For Sale Banner -->
+    <div class="for-sale-banner">
+        <div class="banner-content">
+            <span class="banner-text">🏷️ This domain & website is <strong>FOR SALE</strong></span>
+            <a href="mailto:sale@coffeeofsf.com?subject=Interested%20in%20Purchasing%20Coffee%20of%20SF" class="banner-link">Contact us →</a>
+        </div>
+    </div>
+
     <!-- Navigation -->
     <nav>
-        <a href="<a href="https://www.google.com/maps/search/Saint+Frank+Coffee+Mint" class="btn-view">VIEW →</a>" class="logo">COFFEE OF SF</a>
+        <a href="/" class="logo">COFFEE OF SF</a>
         <ul class="nav-links">
             <li><a href="#discover">DISCOVER</a></li>
             <li><a href="#for-shops">FOR SHOPS</a></li>
@@ -525,8 +521,8 @@ nav {
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero">
-        <span class="tag">☕ SAN FRANCISCO'S WALL COFFEE SPOTS</span>
+    <section class="hero" id="discover">
+        <span class="tag">☕ SAN FRANCISCO'S BEST COFFEE SPOTS</span>
         <h1>Find your <span>ritual.</span></h1>
         <p>Not another directory. A curated guide to the SF cafés worth your morning — sorted by how you actually feel.</p>
         
@@ -559,13 +555,13 @@ nav {
                 <h3>Saint Frank Coffee</h3>
                 <p class="location">📍 Polk Gulch</p>
                 <p class="quote">"Taste and see."</p>
-                <a href="#" class="btn-view-menu">VIEW THE MENU →</a>
+                <a href="https://www.saintfrankcoffee.com" target="_blank" class="btn-view-menu">VIEW THE MENU →</a>
             </div>
         </div>
     </section>
 
     <!-- Captured Moments -->
-    <section class="moments">
+    <section class="moments" id="for-shops">
         <div class="section-header">
             <p class="section-label">ALL SHOPS</p>
             <h2 class="section-title">Captured moments</h2>
@@ -587,7 +583,7 @@ nav {
                             <span>4.8</span>
                         </div>
                         <span class="price">$5.00</span>
-                        <a href="#" class="btn-view">VIEW →</a>
+                        <a href="https://www.saintfrankcoffee.com" target="_blank" class="btn-view">VIEW →</a>
                     </div>
                 </div>
             </div>
@@ -607,7 +603,7 @@ nav {
                             <span>4.6</span>
                         </div>
                         <span class="price">$5.00</span>
-                        <a href="#" class="btn-view">VIEW →</a>
+                        <a href="https://www.google.com/maps/search/Saint+Frank+Coffee+Mint+San+Francisco" target="_blank" class="btn-view">VIEW →</a>
                     </div>
                 </div>
             </div>
@@ -627,7 +623,7 @@ nav {
                             <span>4.7</span>
                         </div>
                         <span class="price">$4.75</span>
-                        <a href="#" class="btn-view">VIEW →</a>
+                        <a href="https://www.google.com/maps/search/Saint+Frank+Coffee+Irving+San+Francisco" target="_blank" class="btn-view">VIEW →</a>
                     </div>
                 </div>
             </div>
@@ -647,7 +643,7 @@ nav {
                             <span>4.6</span>
                         </div>
                         <span class="price">$5.00</span>
-                        <a href="#" class="btn-view">VIEW →</a>
+                        <a href="https://www.ritualroasters.com" target="_blank" class="btn-view">VIEW →</a>
                     </div>
                 </div>
             </div>
@@ -667,7 +663,7 @@ nav {
                             <span>4.6</span>
                         </div>
                         <span class="price">$4.00</span>
-                        <a href="<a href="https://www.google.com/maps/search/The+Madrone+San+Francisco" class="btn-view">VIEW →</a>" class="btn-view">VIEW →</a>
+                        <a href="https://www.google.com/maps/search/The+Madrone+San+Francisco" target="_blank" class="btn-view">VIEW →</a>
                     </div>
                 </div>
             </div>
@@ -687,7 +683,7 @@ nav {
                             <span>4.4</span>
                         </div>
                         <span class="price">$3.75</span>
-                        <a href="#" class="btn-view">VIEW →</a>
+                        <a href="https://www.google.com/maps/search/Vintage+Coffee+San+Francisco" target="_blank" class="btn-view">VIEW →</a>
                     </div>
                 </div>
             </div>
@@ -696,7 +692,7 @@ nav {
 
     <!-- Footer -->
     <footer>
-        <p>© 2025 Coffee of SF - Best coffee spots by real people. For Shops.</p>
+        <p>© 2024 Coffee of SF - Best coffee spots by real people. For Shops.</p>
     </footer>
 
     <script>
