@@ -3,389 +3,645 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Coffee of SF | Find Your Ritual</title>
+    <title>Coffee of SF - Find Your Ritual</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --bg-color: #f7f5f0;
-            --text-main: #2c2520;
-            --text-muted: #70655c;
-            --accent-brand: #bd6a38;
-            --accent-bg: #f9f3eb;
-            --card-bg: #ffffff;
-            --border-color: #e6e1da;
-        }
-
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #d4a574;
+            --secondary-color: #8b6914;
+            --text-dark: #2c2c2c;
+            --text-light: #666;
+            --bg-cream: #faf8f5;
+            --bg-white: #ffffff;
+            --border-color: #e8e4de;
         }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-cream);
+            color: var(--text-dark);
             line-height: 1.6;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
         }
 
         /* Navigation */
         nav {
+            background: var(--bg-white);
+            padding: 1.5rem 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 40px;
-            background: transparent;
-            max-width: 1300px;
-            margin: 0 auto;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
 
         .logo {
-            font-weight: 800;
-            font-size: 1.1rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            text-decoration: none;
         }
 
         .nav-links {
             display: flex;
-            gap: 30px;
+            gap: 2.5rem;
             align-items: center;
+            list-style: none;
         }
 
         .nav-links a {
             text-decoration: none;
-            color: var(--text-main);
-            font-weight: 600;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
+            color: var(--text-dark);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.3s;
         }
 
-        .btn-cta {
-            background: var(--text-main);
-            color: #fff !important;
-            padding: 10px 20px;
-            border-radius: 4px;
-            font-weight: 700;
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .btn-primary {
+            background: var(--text-dark);
+            color: var(--bg-white) !important;
+            padding: 0.6rem 1.5rem;
+            border-radius: 25px;
+            transition: all 0.3s;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-color);
+            transform: translateY(-2px);
         }
 
         /* Hero Section */
         .hero {
+            background: linear-gradient(135deg, #f5f0eb 0%, #ede6de 100%);
+            padding: 5rem 5%;
             text-align: center;
-            padding: 80px 20px 60px 20px;
-            max-width: 800px;
-            margin: 0 auto;
-            position: relative;
+            min-height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
 
-        .hero::before {
-            content: "COFFEE OF SF";
-            position: absolute;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 8rem;
-            font-weight: 900;
-            color: #eae5dc;
-            z-index: -1;
-            white-space: nowrap;
-            opacity: 0.4;
-        }
-
-        .hero-badge {
-            color: var(--accent-brand);
+        .tag {
+            display: inline-block;
+            background: rgba(212, 165, 116, 0.2);
+            color: var(--secondary-color);
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
             font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            font-weight: 700;
-            margin-bottom: 15px;
-            display: block;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
         }
 
-        .hero h2 {
+        .hero h1 {
             font-size: 4rem;
-            font-weight: 800;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
             line-height: 1.1;
-            letter-spacing: -0.03em;
-            margin-bottom: 25px;
-            color: var(--text-main);
+        }
+
+        .hero h1 span {
+            color: var(--primary-color);
+            font-style: italic;
         }
 
         .hero p {
-            font-size: 1.2rem;
-            color: var(--text-muted);
-            max-width: 550px;
-            margin: 0 auto 35px auto;
-        }
-
-        /* Search Container */
-        .search-container {
-            display: flex;
+            font-size: 1.1rem;
+            color: var(--text-light);
             max-width: 600px;
-            margin: 0 auto 30px auto;
-            background: #fff;
-            padding: 6px;
-            border-radius: 6px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
-            border: 1px solid var(--border-color);
+            margin-bottom: 2.5rem;
         }
 
-        .search-input {
-            flex-grow: 1;
+        /* Search Box */
+        .search-container {
+            background: var(--bg-white);
+            padding: 0.5rem;
+            border-radius: 50px;
+            display: flex;
+            max-width: 650px;
+            width: 100%;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            margin-bottom: 1.5rem;
+        }
+
+        .search-container input {
+            flex: 1;
             border: none;
-            padding: 12px 20px;
+            padding: 1rem 1.5rem;
             font-size: 1rem;
             outline: none;
-            color: var(--text-main);
-        }
-
-        .search-input::placeholder {
-            color: #bfae9e;
+            border-radius: 50px;
+            font-family: 'Inter', sans-serif;
         }
 
         .search-btn {
-            background: var(--accent-brand);
-            color: white;
+            background: var(--primary-color);
+            color: var(--bg-white);
             border: none;
-            padding: 0 25px;
-            border-radius: 4px;
-            font-weight: 700;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
             cursor: pointer;
-            text-transform: uppercase;
-            font-size: 0.85rem;
-            letter-spacing: 0.05em;
+            transition: all 0.3s;
+            font-family: 'Inter', sans-serif;
         }
 
-        /* Tags */
-        .search-tags {
-            font-size: 0.85rem;
-            color: var(--text-muted);
+        .search-btn:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
         }
 
-        .search-tags span {
-            color: var(--text-muted);
-            margin-right: 15px;
+        /* Filters */
+        .filters {
+            display: flex;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+            justify-content: center;
         }
 
-        .search-tags a {
-            color: var(--text-main);
-            text-decoration: none;
-            margin-right: 12px;
-            border-bottom: 1px solid #c2b9af;
-            padding-bottom: 2px;
+        .filter-tag {
+            background: var(--bg-white);
+            border: 1px solid var(--border-color);
+            padding: 0.5rem 1.2rem;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s;
         }
 
-        /* Main Content Grid */
-        .main-content {
-            max-width: 1300px;
-            margin: 60px auto;
-            padding: 0 40px;
+        .filter-tag:hover, .filter-tag.active {
+            background: var(--text-dark);
+            color: var(--bg-white);
+            border-color: var(--text-dark);
+        }
+
+        /* Section Styling */
+        section {
+            padding: 5rem 5%;
         }
 
         .section-header {
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--text-muted);
-            margin-bottom: 25px;
-            font-weight: 700;
+            margin-bottom: 3rem;
         }
 
-        /* Featured Roaster Card */
+        .section-label {
+            font-size: 0.85rem;
+            color: var(--primary-color);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            color: var(--text-dark);
+        }
+
+        /* Featured Roaster */
+        .featured {
+            background: var(--bg-white);
+        }
+
         .featured-card {
             display: grid;
-            grid-template-columns: 1.1fr 1fr;
-            background: var(--card-bg);
-            border-radius: 12px;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            background: var(--bg-white);
+            border-radius: 15px;
             overflow: hidden;
-            border: 1px solid var(--border-color);
-            margin-bottom: 70px;
+            box-shadow: 0 5px 30px rgba(0,0,0,0.08);
         }
 
-        .featured-img-box {
-            height: 380px;
-            background: #eae5dc;
-        }
-
-        .featured-img-box img {
+        .featured-image {
             width: 100%;
             height: 100%;
+            min-height: 400px;
             object-fit: cover;
         }
 
-        .featured-info {
-            padding: 50px;
+        .featured-content {
+            padding: 3rem;
             display: flex;
             flex-direction: column;
             justify-content: center;
         }
 
-        .live-status {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: #e6f4ea;
-            color: #137333;
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            padding: 4px 10px;
-            border-radius: 4px;
-            align-self: flex-start;
-            margin-bottom: 20px;
-            letter-spacing: 0.05em;
-        }
-
-        .live-status::before {
-            content: "";
+        .featured-badge {
             display: inline-block;
-            width: 6px;
-            height: 6px;
-            background: #137333;
-            border-radius: 50%;
+            background: #a8e6cf;
+            color: #2d6a4f;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            width: fit-content;
         }
 
-        .featured-info h3 {
-            font-size: 2.2rem;
-            font-weight: 800;
-            letter-spacing: -0.02em;
-            margin-bottom: 5px;
+        .featured-content h3 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
         }
 
-        .location-sub {
-            font-size: 0.95rem;
-            color: var(--text-muted);
-            margin-bottom: 15px;
+        .location {
+            color: var(--text-light);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
-        .featured-info .tagline {
+        .quote {
             font-style: italic;
-            color: var(--text-muted);
-            margin-bottom: 20px;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
         }
 
-        .view-menu-btn {
-            color: var(--accent-brand);
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin-top: 10px;
+        .btn-view-menu {
             display: inline-flex;
             align-items: center;
-            gap: 4px;
+            gap: 0.5rem;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            transition: gap 0.3s;
         }
 
-        /* All Spots Grid */
-        .spots-grid {
+        .btn-view-menu:hover {
+            gap: 1rem;
+        }
+
+        /* Coffee Shops Grid */
+        .shops-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
         }
 
-        .spot-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
+        .shop-card {
+            background: var(--bg-white);
+            border-radius: 15px;
             overflow: hidden;
-            display: flex;
-            flex-direction: column;
+            box-shadow: 0 3px 20px rgba(0,0,0,0.06);
+            transition: all 0.3s;
+            cursor: pointer;
         }
 
-        .spot-img-box {
+        .shop-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+        }
+
+        .shop-image-container {
             position: relative;
-            height: 240px;
-            background: #eae5dc;
+            height: 250px;
+            overflow: hidden;
         }
 
-        .spot-img-box img {
+        .shop-image {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transition: transform 0.3s;
         }
 
-        .card-badge {
+        .shop-card:hover .shop-image {
+            transform: scale(1.05);
+        }
+
+        .shop-badge {
             position: absolute;
-            top: 15px;
-            left: 15px;
-            background: #fff;
-            color: var(--text-main);
-            padding: 4px 10px;
-            border-radius: 4px;
-            font-size: 0.7rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-        }
-
-        .spot-details {
-            padding: 25px;
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-        }
-
-        .spot-title-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 4px;
-        }
-
-        .spot-title-row h4 {
-            font-size: 1.25rem;
-            font-weight: 700;
-            letter-spacing: -0.01em;
-        }
-
-        .spot-neighborhood {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            color: var(--text-muted);
-            letter-spacing: 0.05em;
-            margin-bottom: 15px;
+            top: 1rem;
+            left: 1rem;
+            background: rgba(255,255,255,0.95);
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
             font-weight: 600;
+            color: var(--text-dark);
         }
 
-        .spot-desc {
+        .shop-info {
+            padding: 1.5rem;
+        }
+
+        .shop-name {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .shop-description {
+            color: var(--text-light);
             font-size: 0.95rem;
-            color: var(--text-main);
-            margin-bottom: 20px;
-            flex-grow: 1;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
         }
 
-        .card-footer {
+        .shop-footer {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding-top: 1rem;
             border-top: 1px solid var(--border-color);
-            padding-top: 15px;
-            font-size: 0.9rem;
-            font-weight: 700;
         }
 
-        .rating-box {
-            color: #d97706;
+        .rating {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
         }
 
-        .price-box {
-            color: var(--text-muted);
+        .rating svg {
+            fill: var(--primary-color);
+        }
+
+        .price {
+            color: var(--text-light);
             font-weight: 500;
         }
 
-        .card-view-link {
-            color: var(--text-main);
+        .btn-view {
+            color: var(--primary-color);
             text-decoration: none;
-            text-transform: uppercase;
-            font-size: 0.8rem;
-            letter-spacing: 0.05em;
+            font-weight: 600;
+            font-size: 0.9rem;
         }
 
-        /* Responsive Breakpoints */
-        @media (max-width: 900px) {
-            .featured-card {grid-template-columns: 1fr;}.featured-img-box {height: 260px;}.featured-info {padding: 30px;}.hero h2 {font-size: 2.8rem;}}
+        .btn-view:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-dark);
+            color: var(--bg-white);
+            text-align: center;
+            padding: 3rem 5%;
+            margin-top: 5rem;
+        }
+
+        footer p {
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1.5rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .featured-card {
+                grid-template-columns: 1fr;
+            }
+
+            .featured-image {
+                min-height: 300px;
+            }
+
+            .shops-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .search-container {
+                flex-direction: column;
+                border-radius: 20px;
+            }
+
+            .search-btn {
+                border-radius: 15px;
+                margin: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <a href="#" class="logo">COFFEE OF SF</a>
+        <ul class="nav-links">
+            <li><a href="#discover">DISCOVER</a></li>
+            <li><a href="#for-shops">FOR SHOPS</a></li>
+            <li><a href="#" class="btn-primary">MY LIST (0)</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <span class="tag">☕ SAN FRANCISCO'S WALL COFFEE SPOTS</span>
+        <h1>Find your <span>ritual.</span></h1>
+        <p>Not another directory. A curated guide to the SF cafés worth your morning — sorted by how you actually feel.</p>
+        
+        <div class="search-container">
+            <input type="text" placeholder="Start typing: quiet focus, late night...">
+            <button class="search-btn">FIND MY SPOT →</button>
+        </div>
+
+        <div class="filters">
+            <span class="filter-tag active">All</span>
+            <span class="filter-tag">Remote work</span>
+            <span class="filter-tag">Pastries</span>
+            <span class="filter-tag">Late hours</span>
+            <span class="filter-tag">Quiet</span>
+            <span class="filter-tag">Outdoor</span>
+        </div>
+    </section>
+
+    <!-- Featured Roaster -->
+    <section class="featured">
+        <div class="section-header">
+            <p class="section-label">FEATURED</p>
+            <h2 class="section-title">Featured roaster</h2>
+        </div>
+        
+        <div class="featured-card">
+            <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=800&h=600&fit=crop" alt="Saint Frank Coffee" class="featured-image">
+            <div class="featured-content">
+                <span class="featured-badge">★ OPEN NOW</span>
+                <h3>Saint Frank Coffee</h3>
+                <p class="location">📍 Polk Gulch</p>
+                <p class="quote">"Taste and see."</p>
+                <a href="#" class="btn-view-menu">VIEW THE MENU →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Captured Moments -->
+    <section class="moments">
+        <div class="section-header">
+            <p class="section-label">ALL SHOPS</p>
+            <h2 class="section-title">Captured moments</h2>
+        </div>
+
+        <div class="shops-grid">
+            <!-- Shop Card 1 -->
+            <div class="shop-card">
+                <div class="shop-image-container">
+                    <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=600&h=400&fit=crop" alt="Saint Frank Coffee" class="shop-image">
+                    <span class="shop-badge">SPECIALTY ROASTER</span>
+                </div>
+                <div class="shop-info">
+                    <h3 class="shop-name">Saint Frank Coffee</h3>
+                    <p class="shop-description">Specialty coffee roastery in San Francisco with elevated cafe fare. Single origin pour-overs and expertly pulled espresso shots.</p>
+                    <div class="shop-footer">
+                        <div class="rating">
+                            <svg width="20" height="20" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                            <span>4.8</span>
+                        </div>
+                        <span class="price">$5.00</span>
+                        <a href="#" class="btn-view">VIEW →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Shop Card 2 -->
+            <div class="shop-card">
+                <div class="shop-image-container">
+                    <img src="https://images.unsplash.com/photo-1501339847302-ac1a694b27a4?w=600&h=400&fit=crop" alt="Saint Frank Coffee - Mint" class="shop-image">
+                    <span class="shop-badge">SPECIALTY ROASTER</span>
+                </div>
+                <div class="shop-info">
+                    <h3 class="shop-name">Saint Frank Coffee — Mint</h3>
+                    <p class="shop-description">Saint Frank's downtown specialty cafe. The same care, a quieter room. Where the SoMa crowd comes to caffeinate meetings.</p>
+                    <div class="shop-footer">
+                        <div class="rating">
+                            <svg width="20" height="20" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                            <span>4.6</span>
+                        </div>
+                        <span class="price">$5.00</span>
+                        <a href="#" class="btn-view">VIEW →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Shop Card 3 -->
+            <div class="shop-card">
+                <div class="shop-image-container">
+                    <img src="https://images.unsplash.com/photo-1497935586351-b67a49e012bf?w=600&h=400&fit=crop" alt="Saint Frank Coffee - Irving" class="shop-image">
+                    <span class="shop-badge">NEIGHBORHOOD SPOT</span>
+                </div>
+                <div class="shop-info">
+                    <h3 class="shop-name">Saint Frank Coffee — Irving</h3>
+                    <p class="shop-description">The neighborhood's daily stop. Same Saint Frank roast, a warmer, slower room. Where regulars both work to order.</p>
+                    <div class="shop-footer">
+                        <div class="rating">
+                            <svg width="20" height="20" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                            <span>4.7</span>
+                        </div>
+                        <span class="price">$4.75</span>
+                        <a href="#" class="btn-view">VIEW →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Shop Card 4 -->
+            <div class="shop-card">
+                <div class="shop-image-container">
+                    <img src="https://images.unsplash.com/photo-1559925393-8be0ec4767c8?w=600&h=400&fit=crop" alt="Ritual Roasters" class="shop-image">
+                    <span class="shop-badge">COFFEE NERD</span>
+                </div>
+                <div class="shop-info">
+                    <h3 class="shop-name">Ritual Roasters</h3>
+                    <p class="shop-description">Four ounce cups that change single origin. People who know conversation about coffee taste like coffee. The ritual and all.</p>
+                    <div class="shop-footer">
+                        <div class="rating">
+                            <svg width="20" height="20" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                            <span>4.6</span>
+                        </div>
+                        <span class="price">$5.00</span>
+                        <a href="#" class="btn-view">VIEW →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Shop Card 5 -->
+            <div class="shop-card">
+                <div class="shop-image-container">
+                    <img src="https://images.unsplash.com/photo-1521017432531-fbd92d768888?w=600&h=400&fit=crop" alt="The Madrone" class="shop-image">
+                    <span class="shop-badge">THE MADRONE, WEST MARINA</span>
+                </div>
+                <div class="shop-info">
+                    <h3 class="shop-name">The Madrone</h3>
+                    <p class="shop-description">Outdoor seating, perfect sunlight. Owners who know your name. You'll ease me into whatever you're having. That's the point.</p>
+                    <div class="shop-footer">
+                        <div class="rating">
+                            <svg width="20" height="20" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                            <span>4.6</span>
+                        </div>
+                        <span class="price">$4.00</span>
+                        <a href="#" class="btn-view">VIEW →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Shop Card 6 -->
+            <div class="shop-card">
+                <div class="shop-image-container">
+                    <img src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?w=600&h=400&fit=crop" alt="Coffee Shop" class="shop-image">
+                    <span class="shop-badge">CHILL HUB</span>
+                </div>
+                <div class="shop-info">
+                    <h3 class="shop-name">Vintage Vinyl Coffee</h3>
+                    <p class="shop-description">Vintage charm that hums music. Warm atmosphere. Good conversation happens here. One morning feel right. No rush.</p>
+                    <div class="shop-footer">
+                        <div class="rating">
+                            <svg width="20" height="20" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                            <span>4.4</span>
+                        </div>
+                        <span class="price">$3.75</span>
+                        <a href="#" class="btn-view">VIEW →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2025 Coffee of SF - Best coffee spots by real people. For Shops.</p>
+    </footer>
+
+    <script>
+        // Simple interactivity
+        document.querySelectorAll('.filter-tag').forEach(tag => {
+            tag.addEventListener('click', function() {
+                document.querySelectorAll('.filter-tag').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Search functionality
+        document.querySelector('.search-btn').addEventListener('click', function() {
+            const searchTerm = document.querySelector('.search-container input').value;
+            if(searchTerm) {
+                alert('Searching for: ' + searchTerm);
+            }
+        });
+    </script>
+</body>
+</html>
