@@ -1,218 +1,391 @@
-import React, { useState, useMemo } from "react";
-import { Link } from "react-router-dom";
-import { Search, ArrowRight, Sparkles, MapPin } from "lucide-react";
-import { CAFES, isOpenNow } from "@/data/cafes";
-import Navbar from "@/components/Navbar";
-import CafeCard from "@/components/CafeCard";
-import OpenBadge from "@/components/OpenBadge";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coffee of SF | Find Your Ritual</title>
+    <style>
+        :root {
+            --bg-color: #f7f5f0;
+            --text-main: #2c2520;
+            --text-muted: #70655c;
+            --accent-brand: #bd6a38;
+            --accent-bg: #f9f3eb;
+            --card-bg: #ffffff;
+            --border-color: #e6e1da;
+        }
 
-const QUICK_VIBES = [
-  "Russian Hill",
-  "Downtown",
-  "Inner Sunset",
-  "pour over",
-  "pastries",
-];
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
 
-export default function Home() {
-  const [vibe, setVibe] = useState("");
-  const [activeVibe, setActiveVibe] = useState("");
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
 
-  const featured = CAFES.find((c) => c.featured) || CAFES[0];
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            background: transparent;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
 
-  const filtered = useMemo(() => {
-    const q = activeVibe.trim().toLowerCase();
-    if (!q) return CAFES;
-    return CAFES.filter(
-      (c) =>
-        c.vibes.some((v) => v.includes(q)) ||
-        c.neighborhood.toLowerCase().includes(q) ||
-        c.vibeBadge.toLowerCase().includes(q) ||
-        c.name.toLowerCase().includes(q)
-    );
-  }, [activeVibe]);
+        .logo {
+            font-weight: 800;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
 
-  const runSearch = () => setActiveVibe(vibe);
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
 
-  return (
-    <div className="min-h-screen bg-[#f5f0e8] text-[#2a1d12] font-body">
-      <Navbar />
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
 
-      {/* HERO */}
-      <header className="relative pt-32 pb-20 px-5 sm:px-8 overflow-hidden">
-        <div
-          className="absolute inset-0 pointer-events-none opacity-[0.04]"
-          style={{
-            fontSize: "30vw",
-            fontWeight: 700,
-            fontFamily: "'Playfair Display', serif",
-            color: "#c2410c",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          COFFEE
-        </div>
+        .btn-cta {
+            background: var(--text-main);
+            color: #fff !important;
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-weight: 700;
+        }
 
-        <div className="relative max-w-[1100px] mx-auto text-center">
-          <span className="inline-flex items-center gap-2 px-4 py-1.5 bg-[#c2410c]/10 text-[#c2410c] text-xs uppercase tracking-[2px] font-semibold mb-8">
-            <Sparkles className="w-3.5 h-3.5" /> San Francisco's real coffee spots
-          </span>
-          <h1
-            className="text-[clamp(2.8rem,8vw,5.5rem)] leading-[0.95] font-bold text-[#2a1d12] mb-6"
-            style={{ fontFamily: "'Playfair Display', serif" }}
-          >
-            Find your
-            <br />
-            <span className="text-[#c2410c] italic">ritual.</span>
-          </h1>
-          <p className="max-w-xl mx-auto text-lg text-[#5c4a38] leading-relaxed mb-10">
-            Not another directory. A curated guide to the SF cafés worth your
-            morning — sorted by how you actually feel.
-          </p>
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 80px 20px 60px 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
 
-          {/* SEARCH */}
-          <div className="max-w-2xl mx-auto bg-white border border-[#e7dfd2] p-2 flex flex-col sm:flex-row gap-2 shadow-[0_20px_50px_rgba(42,29,18,0.08)]">
-            <div className="flex items-center gap-3 flex-grow px-4">
-              <Search className="w-5 h-5 text-[#c2410c] flex-shrink-0" />
-              <input
-                type="text"
-                value={vibe}
-                onChange={(e) => setVibe(e.target.value)}
-                onKeyDown={(e) => e.key === "Enter" && runSearch()}
-                placeholder="quiet morning, work focus, latte art..."
-                className="w-full py-3 bg-transparent outline-none text-[#2a1d12] placeholder:text-[#5c4a38]/50"
-              />
-            </div>
-            <button
-              onClick={runSearch}
-              className="px-6 py-3 bg-[#c2410c] text-white font-bold uppercase tracking-[2px] text-sm hover:bg-[#2a1d12] transition-colors flex items-center justify-center gap-2"
-            >
-              Find My Spot <ArrowRight className="w-4 h-4" />
-            </button>
-          </div>
+        .hero::before {
+            content: "COFFEE OF SF";
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 8rem;
+            font-weight: 900;
+            color: #eae5dc;
+            z-index: -1;
+            white-space: nowrap;
+            opacity: 0.4;
+        }
 
-          <div className="mt-6 flex flex-wrap items-center justify-center gap-2">
-            <span className="text-xs text-[#5c4a38]/60 uppercase tracking-[1px] mr-1">
-              Try:
-            </span>
-            {QUICK_VIBES.map((v) => (
-              <button
-                key={v}
-                onClick={() => {
-                  setVibe(v);
-                  setActiveVibe(v);
-                }}
-                className="px-3 py-1 text-xs bg-white border border-[#e7dfd2] text-[#5c4a38] hover:border-[#c2410c] hover:text-[#c2410c] transition-colors"
-              >
-                {v}
-              </button>
-            ))}
-          </div>
-        </div>
-      </header>
+        .hero-badge {
+            color: var(--accent-brand);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            font-weight: 700;
+            margin-bottom: 15px;
+            display: block;
+        }
 
-      {/* FEATURED SHOP */}
-      <section className="max-w-[1200px] mx-auto px-5 sm:px-8 py-16">
-        <div className="flex items-end justify-between mb-8 flex-wrap gap-4">
-          <div>
-            <p className="text-xs uppercase tracking-[3px] text-[#c2410c] font-bold mb-2">
-              Featured
-            </p>
-            <h2
-              className="text-3xl sm:text-4xl font-bold"
-              style={{ fontFamily: "'Playfair Display', serif" }}
-            >
-              Featured roaster
-            </h2>
-          </div>
-        </div>
+        .hero h2 {
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -0.03em;
+            margin-bottom: 25px;
+            color: var(--text-main);
+        }
 
-        <Link
-          to={`/cafe/${featured.id}`}
-          className="group grid md:grid-cols-2 bg-white border border-[#e7dfd2] overflow-hidden hover:shadow-[0_30px_60px_rgba(42,29,18,0.12)] transition-all"
-        >
-          <div className="relative h-72 md:h-auto overflow-hidden">
-            <img
-              src={featured.photo}
-              alt={featured.name}
-              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-            />
-          </div>
-          <div className="p-8 sm:p-12 flex flex-col justify-center">
-            <OpenBadge open={isOpenNow(featured.hours)} />
-            <h3
-              className="mt-5 text-4xl font-bold mb-2"
-              style={{ fontFamily: "'Playfair Display', serif" }}
-            >
-              {featured.name}
-            </h3>
-            <p className="flex items-center gap-1.5 text-sm text-[#5c4a38] mb-4">
-              <MapPin className="w-4 h-4 text-[#c2410c]" /> {featured.neighborhood}
-            </p>
-            <p className="text-[#5c4a38] leading-relaxed mb-6 italic">
-              "{featured.tagline}"
-            </p>
-            <span className="inline-flex items-center gap-2 text-[#c2410c] font-bold uppercase tracking-[2px] text-sm group-hover:gap-3 transition-all">
-              View the menu <ArrowRight className="w-4 h-4" />
-            </span>
-          </div>
-        </Link>
-      </section>
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 550px;
+            margin: 0 auto 35px auto;
+        }
 
-      {/* CAFES GRID */}
-      <section className="max-w-[1200px] mx-auto px-5 sm:px-8 py-16">
-        <div className="flex items-end justify-between mb-8 flex-wrap gap-4">
-          <div>
-            <p className="text-xs uppercase tracking-[3px] text-[#c2410c] font-bold mb-2">
-              {activeVibe ? `Matching "${activeVibe}"` : "All spots"}
-            </p>
-            <h2
-              className="text-3xl sm:text-4xl font-bold"
-              style={{ fontFamily: "'Playfair Display', serif" }}
-            >
-              Captured moments
-            </h2>
-          </div>
-          {activeVibe && (
-            <button
-              onClick={() => {
-                setActiveVibe("");
-                setVibe("");
-              }}
-              className="text-sm text-[#5c4a38] underline hover:text-[#c2410c]"
-            >
-              Clear filter
-            </button>
-          )}
-        </div>
+        /* Search Container */
+        .search-container {
+            display: flex;
+            max-width: 600px;
+            margin: 0 auto 30px auto;
+            background: #fff;
+            padding: 6px;
+            border-radius: 6px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            border: 1px solid var(--border-color);
+        }
 
-        {filtered.length === 0 ? (
-          <div className="text-center py-20">
-            <p className="text-[#5c4a38] text-lg mb-2">
-              No spots match "{activeVibe}" — yet.
-            </p>
-            <p className="text-sm text-[#5c4a38]/60">Try another vibe above.</p>
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filtered.map((cafe) => (
-              <Link key={cafe.id} to={`/cafe/${cafe.id}`}>
-                <CafeCard cafe={cafe} />
-              </Link>
-            ))}
-          </div>
-        )}
-      </section>
+        .search-input {
+            flex-grow: 1;
+            border: none;
+            padding: 12px 20px;
+            font-size: 1rem;
+            outline: none;
+            color: var(--text-main);
+        }
 
-      {/* FOOTER */}
-      <footer className="border-t border-[#e7dfd2] mt-16 py-10 px-5 sm:px-8 text-center text-sm text-[#5c4a38]/70">
-        © 2026 Coffee of SF · Real coffee spots by real people ·{" "}
-        <Link to="/for-shops" className="text-[#c2410c] hover:underline">
-          For Shops
-        </Link>
-      </footer>
-    </div>
-  );
-}
+        .search-input::placeholder {
+            color: #bfae9e;
+        }
+
+        .search-btn {
+            background: var(--accent-brand);
+            color: white;
+            border: none;
+            padding: 0 25px;
+            border-radius: 4px;
+            font-weight: 700;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 0.05em;
+        }
+
+        /* Tags */
+        .search-tags {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .search-tags span {
+            color: var(--text-muted);
+            margin-right: 15px;
+        }
+
+        .search-tags a {
+            color: var(--text-main);
+            text-decoration: none;
+            margin-right: 12px;
+            border-bottom: 1px solid #c2b9af;
+            padding-bottom: 2px;
+        }
+
+        /* Main Content Grid */
+        .main-content {
+            max-width: 1300px;
+            margin: 60px auto;
+            padding: 0 40px;
+        }
+
+        .section-header {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+
+        /* Featured Roaster Card */
+        .featured-card {
+            display: grid;
+            grid-template-columns: 1.1fr 1fr;
+            background: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            margin-bottom: 70px;
+        }
+
+        .featured-img-box {
+            height: 380px;
+            background: #eae5dc;
+        }
+
+        .featured-img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .featured-info {
+            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .live-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: #e6f4ea;
+            color: #137333;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: 4px 10px;
+            border-radius: 4px;
+            align-self: flex-start;
+            margin-bottom: 20px;
+            letter-spacing: 0.05em;
+        }
+
+        .live-status::before {
+            content: "";
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            background: #137333;
+            border-radius: 50%;
+        }
+
+        .featured-info h3 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            margin-bottom: 5px;
+        }
+
+        .location-sub {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+        }
+
+        .featured-info .tagline {
+            font-style: italic;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+
+        .view-menu-btn {
+            color: var(--accent-brand);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-top: 10px;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* All Spots Grid */
+        .spots-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+            gap: 30px;
+        }
+
+        .spot-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .spot-img-box {
+            position: relative;
+            height: 240px;
+            background: #eae5dc;
+        }
+
+        .spot-img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .card-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: #fff;
+            color: var(--text-main);
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+        }
+
+        .spot-details {
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .spot-title-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 4px;
+        }
+
+        .spot-title-row h4 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+        }
+
+        .spot-neighborhood {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            letter-spacing: 0.05em;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .spot-desc {
+            font-size: 0.95rem;
+            color: var(--text-main);
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid var(--border-color);
+            padding-top: 15px;
+            font-size: 0.9rem;
+            font-weight: 700;
+        }
+
+        .rating-box {
+            color: #d97706;
+        }
+
+        .price-box {
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .card-view-link {
+            color: var(--text-main);
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 0.05em;
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 900px) {
+            .featured-card {grid-template-columns: 1fr;}.featured-img-box {height: 260px;}.featured-info {padding: 30px;}.hero h2 {font-size: 2.8rem;}}
